@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Summarize</title>
+</head>
+<body>
+    <button onclick="testSummarize()">Test Summarize</button>
+    <div id="result"></div>
+
+    <script>
+        async function testSummarize() {
+            try {
+                const response = await fetch('./summarize.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ content: 'Test content to summarize.' }),
+                });
+                
+                const result = await response.text();
+                document.getElementById('result').textContent = result;
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
